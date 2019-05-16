@@ -40,10 +40,18 @@ class App extends Component {
     };
 
     render() {
+
+        const buttonStyle = {
+          backgroundColor: 'lightBlue',
+          border:'1px solid blue',
+          padding: '8px',
+          cursor: 'pointer'
+        };
+
         return (
             <div className="App">
                 <h1>React complete guide</h1>
-                <button onClick={() => this.switchNameHandler('Zoran')}>Switch name</button>
+                <button style={buttonStyle} onClick={() => this.switchNameHandler('Zoran')}>Switch name</button>
                 <Person
                     customClick={this.switchNameHandler.bind(this, 'Zokiiii!!!')}
                     name={this.state.persons[0].name}
