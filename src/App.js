@@ -8,37 +8,38 @@ class App extends Component {
 
     state = {
         persons: [
-            {name: 'Zoki', age: 36},
-            {name: 'Jeka', age: 30},
-            {name: 'Aki', age: 2}
+            {id:"id1", name: 'Zoki', age: 36},
+            {id:"id2", name: 'Jeka', age: 30},
+            {id:"id3", name: 'Aki', age: 2}
         ],
         otherState: 'some other test will not be changed!',
         showPersons: false
     };
 
-    switchNameHandler = (newName) => {
-        //console.log('was clicked');
-        this.setState(
-            {
-                persons: [
-                    {name: newName, age: 36},
-                    {name: 'Jeka', age: 31},
-                    {name: 'Aki', age: 2}
-                ]
-            }
-        )
+    nameChangeHandler = (event, id) => {
+        const personIndex = this.state.persons.findIndex(p => {
+            return p.id === id;
+        });
+        const person = {...this.state.persons[personIndex]}; // using destructuring to copy object, same like array, just with {...}
+        person.name = event.target.value;
+
+        // Sada treba da updejtujemo state sa novim array-em koji je updejtovan, ali samo za person koji smo menjali
+        const newPersons = [...this.state.persons];
+        newPersons[personIndex] = person; // ovde se u stvari odradjuje poso
+
+        this.setState( {persons: newPersons} );
+
     };
 
-    nameChangeHandler = (event) => {
-        this.setState(
-            {
-                persons: [
-                    {name: 'Zoran', age: 36},
-                    {name: event.target.value, age: 31},
-                    {name: 'Aki', age: 2}
-                ]
-            }
-        )
+    deletePersonHandler = (personIndex) => {
+        //const newPersons = this.state.persons; // ne sme ovako da se radi posto ovako kreiramo pointer na array i menjamo orginalni persons
+        //const newPersons = this.state.persons.slice(); // slice pravi kopiju
+        // ili destructuring
+        const newPersons = [...this.state.persons];
+        newPersons.splice(personIndex, 1);
+        this.setState({
+            persons: newPersons
+        })
     };
 
     togglePersonsHandler = () => {
@@ -62,18 +63,17 @@ class App extends Component {
         if(this.state.showPersons) {
             persons = (
                 <div>
-                    <Person
-                        customClick={this.switchNameHandler.bind(this, 'Zokiiii!!!')}
-                        name={this.state.persons[0].name}
-                        age={this.state.persons[0].age}
-                    >Moj hobi je trcanje</Person>
-                    <Person
-                        changeOnInput={this.nameChangeHandler}
-                        name={this.state.persons[1].name}
-                        age={this.state.persons[1].age}/>
-                    <Person
-                        name={this.state.persons[2].name}
-                        age={this.state.persons[2].age}/>
+                    {
+                        this.state.persons.map((person, index) => {
+                            return <Person
+                                key={person.id}
+                                name={person.name}
+                                age={person.age}
+                                customClick={() => this.deletePersonHandler(index)}
+                                changeOnInput={(event) => this.nameChangeHandler(event, person.id)}
+                            />
+                        })
+                    }
                 </div>
             );
         }
