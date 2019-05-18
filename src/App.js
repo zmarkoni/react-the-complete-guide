@@ -40,14 +40,12 @@ class App extends Component {
     };
 
     render() {
-
         const buttonStyle = {
           backgroundColor: 'lightBlue',
           border:'1px solid blue',
           padding: '8px',
           cursor: 'pointer'
         };
-
         return (
             <div className="App">
                 <h1>React complete guide</h1>
