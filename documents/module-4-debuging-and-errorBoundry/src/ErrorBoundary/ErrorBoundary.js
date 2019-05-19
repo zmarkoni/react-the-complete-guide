@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+// Error Boundaries: https://reactjs.org/docs/error-boundaries.html
 class ErrorBoundary extends Component {
     state = {
         hasError: false,
