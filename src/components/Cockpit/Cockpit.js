@@ -1,20 +1,26 @@
 import React from 'react';
+import classes from './Cockpit.css'
 
 const cockpit = ( props ) => {
-    const buttonStyle = {
-        backgroundColor: 'green',
-        color: 'white',
-        border: '1px solid blue',
-        padding: '8px',
-        cursor: 'pointer'
-    };
+    const assignedClasses = [];
+    let btnClass = '';
 
-    props.showPersons ? buttonStyle.backgroundColor = 'red' : buttonStyle.backgroundColor= 'green';
+    if(props.showPersons) {
+        btnClass = classes.red;
+    }
+
+    if (props.persons.length <= 2) {
+        assignedClasses.push(classes.red); // classes = ['red']
+    }
+    if (props.persons.length <= 1) {
+        assignedClasses.push(classes.bold); // classes = ['red', 'bold']
+    }
 
     return (
-        <div>
+        <div className={classes.Cockpit}>
             <h1>React complete guide</h1>
-            <button style={buttonStyle}
+            <p className={assignedClasses.join( ' ' )}>This is really working!</p>
+            <button className={btnClass}
                     onClick={props.toggle}>
                     toggle persons
             </button>
