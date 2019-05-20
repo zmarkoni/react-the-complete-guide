@@ -1,5 +1,4 @@
 import React from 'react';
-import Person from './Person.css';
 
 const person = ( props ) => {
     return (
@@ -11,6 +10,6 @@ const person = ( props ) => {
             <input type="text" onChange={props.changeOnInput} value={props.name} />
         </div>
     )
-}
+};
 
 export default person;

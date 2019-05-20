@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from './Person/Person'; // need to be uppercase because lowercase elements are reserved for React
+import Persons from '../components/Persons/Persons';
+import Cockpit from "../components/Cockpit/Cockpit"; // need to be uppercase because lowercase elements are reserved for React
 
 // https://reactjs.org/docs/events.html#supported-events
 
@@ -51,40 +52,25 @@ class App extends Component {
     };
 
     render() {
-        const buttonStyle = {
-          backgroundColor: 'lightBlue',
-          border:'1px solid blue',
-          padding: '8px',
-          cursor: 'pointer'
-        };
-
         let persons = null;
-
-        if(this.state.showPersons) {
+        if (this.state.showPersons) {
             persons = (
                 <div>
-                    {
-                        this.state.persons.map((person, index) => {
-                            return <Person
-                                key={person.id}
-                                name={person.name}
-                                age={person.age}
-                                customClick={() => this.deletePersonHandler(index)}
-                                changeOnInput={(event) => this.nameChangeHandler(event, person.id)}
-                            />
-                        })
-                    }
+                    <Persons
+                        persons={this.state.persons}
+                        clicked={this.deletePersonHandler}
+                        changed={this.nameChangeHandler}
+                    />
                 </div>
             );
         }
 
         return (
             <div className="App">
-                <h1>React complete guide</h1>
-                <button style={buttonStyle}
-                        onClick={this.togglePersonsHandler}>
-                        {this.state.showPersons ? 'hide' : 'show'} persons
-                </button>
+                <Cockpit
+                toggle={this.togglePersonsHandler}
+                showPersons={this.state.showPersons}
+                />
                 {persons}
             </div>
         );
