@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from "../components/Cockpit/Cockpit"; // need to be uppercase because lowercase elements are reserved for React
 
@@ -66,7 +66,7 @@ class App extends Component {
         }
 
         return (
-            <div className="App">
+            <div className={classes.App}>
                 <Cockpit
                 toggle={this.togglePersonsHandler}
                 showPersons={this.state.showPersons}
