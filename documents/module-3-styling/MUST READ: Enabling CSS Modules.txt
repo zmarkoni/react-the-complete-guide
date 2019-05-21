@@ -1,0 +1,44 @@
+MUST READ: Enabling CSS Modules
+Don't skip this lecture - and keep it open in a separate browser tab when you go through the next lecture - sorry for the small inconvenience at this point!
+
+In the next lecture, we'll use a styling solution named "CSS modules". I'll explain what it is and how it works over the next lectures.
+
+The way we unlock it changed a little bit though.
+
+In the next lecture, we'll eject from the project created with create-react-app (I'll show how that is done in the next lecture and that process will be exactly the same).
+
+We'll then replace some code in a newly added webpack config file (it'll be available after ejecting).
+
+In the video, I'll look for an entry that starts like this (in the webpack.config.js file):
+
+{
+  test: /\.css$/,
+  ...
+}
+and I then edit this entry.
+
+This entry now looks slightly different. You'll have to find the following part in your webpack.config.js file:
+
+{
+  test: cssRegex,
+  exclude: cssModuleRegex,
+  ...
+}
+and then edit that entry.
+
+Finally, it should look like this:
+
+{
+  test: cssRegex,
+  exclude: cssModuleRegex,
+  use: getStyleLoaders({
+      importLoaders: 1,
+      modules: true,
+      localIdentName: '[name]__[local]__[hash:base64:5]'
+  }),
+}
+You can ignore me editing the webpack.config.prod.js file - with the latest version of create-react-app, ejecting only gives you ONE webpack config file (which you edit as described above).
+
+---
+
+Alternatively, you can now also use CSS modules without ejecting (you still can though, it won't be a problem). In a non-ejected project created with create-react-app, you can use CSS modules as described here: https://facebook.github.io/create-react-app/docs/adding-a-css-modules-stylesheet
