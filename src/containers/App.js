@@ -7,6 +7,11 @@ import Cockpit from "../components/Cockpit/Cockpit"; // need to be uppercase bec
 
 class App extends Component {
 
+    constructor(props) {
+        super(props);
+        console.log('[App.js] constructor');
+    }
+
     state = {
         persons: [
             {id:"id1", name: 'Zoki', age: 36},
@@ -16,6 +21,21 @@ class App extends Component {
         otherState: 'some other test will not be changed!',
         showPersons: false
     };
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps');
+        // use only if we have state in this component
+        return state;
+    }
+
+    componentWillMount() {
+        // will be removed in new React Versions
+        console.log('[App.js] componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    }
 
     nameChangeHandler = (event, id) => {
         const personIndex = this.state.persons.findIndex(p => {
@@ -52,6 +72,7 @@ class App extends Component {
     };
 
     render() {
+        console.log('[App.js] render');
         let persons = null;
         if (this.state.showPersons) {
             persons = (
