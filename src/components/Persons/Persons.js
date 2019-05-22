@@ -39,6 +39,9 @@ class Persons extends Component {
 
     componentDidUpdate(previousProps, previousState, snapShot) {
         console.log('[Persons.js] componentDidUpdate', snapShot);
+        // got for http requests,
+        // do not update state here, only in callback of promise/request is ok to update state!
+        // to not went in infinite loop
     }
 
     render() {

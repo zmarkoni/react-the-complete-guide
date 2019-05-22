@@ -22,20 +22,33 @@ class App extends Component {
         showPersons: false
     };
 
-    // static getDerivedStateFromProps(props, state) {
-    //     console.log('[App.js] getDerivedStateFromProps');
-    //     // use only if we have state in this component
-    //     return state;
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props);
+        // use only if we have state in this component
+        return state;
+    }
+
+    // componentWillMount() {
+    //     // will be removed in new React Versions react-scrips:3.0.0
+    //     console.log('[App.js] componentWillMount');
     // }
 
-    componentWillMount() {
-        // will be removed in new React Versions
-        console.log('[App.js] componentWillMount');
-    }
-
-    componentDidMount() {
+    componentDidMount(nextProps, nextState) {
         console.log('[App.js] componentDidMount');
     }
+
+    shouldComponentUpdate() {
+        console.log('[App.js] shouldComponentUpdate');
+        // can catch snapShot
+        //return false; // Now we will not render Persons component
+        return true;
+    }
+
+    componentDidUpdate() {
+        console.log('[App.js] componentDidUpdate');
+        // can catch snapShot
+    }
+
 
     nameChangeHandler = (event, id) => {
         const personIndex = this.state.persons.findIndex(p => {
