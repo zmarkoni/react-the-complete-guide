@@ -5,16 +5,16 @@ import Person from './Person/Person';
 
 class Persons extends Component {
 
-    static getDerivedStateFromProps(props, state) {
-        console.log('[Persons.js] getDerivedStateFromProps');
-        // use only if we have state in this component
-        return state;
-    }
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log('[Persons.js] getDerivedStateFromProps');
+    //     // use only if we have state in this component
+    //     return state;
+    // }
 
-    componentWillReceiveProps(props) {
-        // will be removed in new React Versions
-        console.log('[Persons.js] componentWillReceiveProps', props);
-    }
+    // componentWillReceiveProps(props) {
+    //     // will be removed in new React Versions react-scrips:3.0.0
+    //     console.log('[Persons.js] componentWillReceiveProps', props);
+    // }
 
     shouldComponentUpdate(nextProps, nextState) {
         // here we need to return true or false if we want to allow React to continue
@@ -30,10 +30,10 @@ class Persons extends Component {
         return {message: 'Snapshot'};
     }
 
-    componentWillUpdate() {
-        // will be removed in new React Versions
-        console.log('[Persons.js] componentWillUpdate');
-    }
+    // componentWillUpdate() {
+    //     // will be removed in new React Versions react-scrips:3.0.0
+    //     console.log('[Persons.js] componentWillUpdate');
+    // }
 
     // Than render() is called
 

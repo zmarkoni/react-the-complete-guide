@@ -22,11 +22,11 @@ class App extends Component {
         showPersons: false
     };
 
-    static getDerivedStateFromProps(props, state) {
-        console.log('[App.js] getDerivedStateFromProps');
-        // use only if we have state in this component
-        return state;
-    }
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log('[App.js] getDerivedStateFromProps');
+    //     // use only if we have state in this component
+    //     return state;
+    // }
 
     componentWillMount() {
         // will be removed in new React Versions
