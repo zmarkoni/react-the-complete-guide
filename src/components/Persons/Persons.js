@@ -44,6 +44,11 @@ class Persons extends Component {
         // to not went in infinite loop
     }
 
+    // for cleanUp will run right before component is removed
+    componentWillUnmount() {
+        console.log('[Persons.js] componentWillUnmount');
+    }
+
     render() {
         console.log('[Persons.js] rendering...');
         return (

@@ -19,11 +19,13 @@ class App extends Component {
             {id:"id3", name: 'Aki', age: 2}
         ],
         otherState: 'some other test will not be changed!',
-        showPersons: false
+        showPersons: false,
+        showCockpit: true
     };
 
     static getDerivedStateFromProps(props, state) {
         console.log('[App.js] getDerivedStateFromProps', props);
+        // uvek se opali cim se promeni state ili props
         // use only if we have state in this component
         return state;
     }
@@ -32,6 +34,8 @@ class App extends Component {
     //     // will be removed in new React Versions react-scrips:3.0.0
     //     console.log('[App.js] componentWillMount');
     // }
+
+    // Sad ide render()
 
     componentDidMount(nextProps, nextState) {
         console.log('[App.js] componentDidMount');
@@ -101,12 +105,18 @@ class App extends Component {
 
         return (
             <div className={classes.App}>
+                <button onClick={() => (
+                    this.setState({showCockpit: !this.state.showCockpit})
+                )}
+                >Toggle Cockpit</button>
+
+                {this.state.showCockpit ?
                 <Cockpit
-                title={this.props.appTitle} // this.props is used because we are inside Class
-                toggle={this.togglePersonsHandler}
-                showPersons={this.state.showPersons}
-                persons={this.state.persons}
-                />
+                    title={this.props.appTitle} // this.props is used because we are inside Class
+                    toggle={this.togglePersonsHandler}
+                    showPersons={this.state.showPersons}
+                    persons={this.state.persons}
+                />: null}
                 {persons}
             </div>
         );

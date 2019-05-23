@@ -1,7 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.css'
 
 const cockpit = ( props ) => {
+
+    // useEffect is React hook which combine all lifeCycle hooks
+    // Can be used in components!!!
+    // it runs for every update(every render)
+    // We always need to pass function, and for second argument we pass data(props/state)
+    // which we want to work with, and it will watch only changes for that data
+    useEffect( () => {
+        console.log('[Cockpit.js] useEffect');
+        // So it runs when component is created, updated
+        // Http request...
+        //const timer = setTimeout(() => {
+        const timer = setTimeout(() => {
+            alert('Saved data to the clud');
+        }, 1000);
+
+        // It runs BEFORE the main useEffect, but AFTER (first) render cycle
+        return () => {
+            //clearInterval(timer);
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        }
+
+    }, [props.persons]); // will update now only when persons change! We can pass many second arguments[a,b,c]
+
+    // Fire every time, since there is no second argument
+    useEffect( () => {
+        console.log('[Cockpit.js] 2nd useEffect');
+        return () => {
+            // very useful to cancel something before component re-render,
+            // works the same like shouldComponentUpdate()
+            console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+        }
+    });
+
+    // Fire only first time
+    /*
+    useEffect( () => {
+        setTimeout(() => {
+            alert('[Cockpit.js] useEffect first time only!');
+        }, 1000);
+    }, []);  // we can call it many times, if we pass empty array as second argument, than it will fire only first time
+    */
+
     const assignedClasses = [];
     let btnClass = '';
 
