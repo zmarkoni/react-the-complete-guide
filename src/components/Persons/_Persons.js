@@ -1,14 +1,39 @@
-// not using right now
-
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import Person from './Person/Person';
 
 //const persons = (props) => props.persons.map((person, index) => {
 
-class Persons extends PureComponent {
+class Persons extends Component {
 
-    // PureComponent implement by default shouldComponentUpdate lifecycle hook
-    // and it will check for all props inside this component
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log('[Persons.js] getDerivedStateFromProps');
+    //     // use only if we have state in this component
+    //     return state;
+    // }
+
+    // componentWillReceiveProps(props) {
+    //     // will be removed in new React Versions react-scrips:3.0.0
+    //     console.log('[Persons.js] componentWillReceiveProps', props);
+    // }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // here we need to return true or false if we want to allow React to continue
+        // usually we compare props here or state
+        console.log('[Persons.js] shouldComponentUpdate');
+        // pay attention here when we compare objects and arrays which are reference type
+        // means they have pointers to object/array so when we work with this, we need to
+        // make sure to create new array/object when assign new values to it's properties
+        if (
+            nextProps.persons !== this.props.persons ||
+            nextProps.changed !== this.props.changed ||
+            nextProps.clicked !== this.props.clicked
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
     getSnapshotBeforeUpdate(previousProps, previousState) {
         console.log('[Persons.js] getSnapshotBeforeUpdate');
