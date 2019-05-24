@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import classes from './Cockpit.css'
 
 const cockpit = ( props ) => {
@@ -8,13 +8,14 @@ const cockpit = ( props ) => {
     // it runs for every update(every render)
     // We always need to pass function, and for second argument we pass data(props/state)
     // which we want to work with, and it will watch only changes for that data
+
     useEffect( () => {
         console.log('[Cockpit.js] useEffect');
         // So it runs when component is created, updated
         // Http request...
         //const timer = setTimeout(() => {
-        const timer = setTimeout(() => {
-            alert('Saved data to the clud');
+        setTimeout(() => {
+            alert('Saved data to the cloud');
         }, 1000);
 
         // It runs BEFORE the main useEffect, but AFTER (first) render cycle
@@ -51,10 +52,10 @@ const cockpit = ( props ) => {
         btnClass = classes.red;
     }
 
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
         assignedClasses.push(classes.red); // classes = ['red']
     }
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
         assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
@@ -70,4 +71,4 @@ const cockpit = ( props ) => {
     )
 };
 
-export default cockpit;
+export default React.memo(cockpit);

@@ -58,10 +58,18 @@ class App extends Component {
         const personIndex = this.state.persons.findIndex(p => {
             return p.id === id;
         });
-        const person = {...this.state.persons[personIndex]}; // using destructuring to copy object, same like array, just with {...}
+        const person = {...this.state.persons[personIndex]};
+        // using destructuring to copy object, same like array, just with {...}
+        // pay attention here when we compare objects and arrays which are reference type
+        // means they have pointers to object/array so when we work with this, we need to
+        // make sure to create new array/object when assign new values to it's properties
+
         person.name = event.target.value;
 
         // Sada treba da updejtujemo state sa novim array-em koji je updejtovan, ali samo za person koji smo menjali
+        // pay attention here when we compare objects and arrays which are reference type
+        // means they have pointers to object/array so when we work with this, we need to
+        // make sure to create new array/object when assign new values to it's properties
         const newPersons = [...this.state.persons];
         newPersons[personIndex] = person; // ovde se u stvari odradjuje poso
 
@@ -110,13 +118,14 @@ class App extends Component {
                 )}
                 >Toggle Cockpit</button>
 
-                {this.state.showCockpit ?
+                {this.state.showCockpit ? (
                 <Cockpit
                     title={this.props.appTitle} // this.props is used because we are inside Class
                     toggle={this.togglePersonsHandler}
                     showPersons={this.state.showPersons}
-                    persons={this.state.persons}
-                />: null}
+                    personsLength={this.state.persons.length}
+                />
+                ): null}
                 {persons}
             </div>
         );

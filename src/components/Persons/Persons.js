@@ -20,7 +20,15 @@ class Persons extends Component {
         // here we need to return true or false if we want to allow React to continue
         // usually we compare props here or state
         console.log('[Persons.js] shouldComponentUpdate');
-        return true;
+        // pay attention here when we compare objects and arrays which are reference type
+        // means they have pointers to object/array so when we work with this, we need to
+        // make sure to create new array/object when assign new values to it's properties
+        if (nextProps.persons !== this.props.persons) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     getSnapshotBeforeUpdate(previousProps, previousState) {
