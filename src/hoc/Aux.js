@@ -6,3 +6,6 @@ const aux = props => props.children;
 // it is important to return just one expressions (JS rule)
 
 export default aux;
+
+// This is our custom component, but there is React built in component React.fragment
+// which do the same
