@@ -6,6 +6,17 @@ import classes from './Person.css';
 
 //const person = ( props ) => {
 class Person extends Component {
+
+    constructor(props) {
+        super(props);
+        this.inputElementRef = React.createRef();
+    }
+
+    componentDidMount() {
+        // this.inputElement.focus();
+        this.inputElementRef.current.focus(); // need to use current!
+    }
+
     render() {
         console.log('[Person.js] rendering...');
         // return (
@@ -16,7 +27,12 @@ class Person extends Component {
                     I am {this.props.name} and I am {this.props.age} years old!
                 </p>
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changeOnInput} value={this.props.name}/>
+                <input type="text"
+                       onChange={this.props.changeOnInput}
+                       value={this.props.name}
+                        //ref={(inputEl) => {this.inputElement = inputEl}}  Old way
+                        ref={this.inputElementRef}  // new way with constructor
+                />
             </Fragment>
         )
     };
