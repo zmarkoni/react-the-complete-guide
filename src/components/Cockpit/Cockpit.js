@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import classes from './Cockpit.css'
 import AuthContext from '../../context/auth-context';
 // So inside Functional components we use React hooks, since lifeCycle methods are available only in Classes
@@ -6,6 +6,11 @@ import AuthContext from '../../context/auth-context';
 const cockpit = ( props ) => {
 
     const toggleBtnRef = useRef(null);
+
+    // https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/13556346#overview
+    // With useContext hook we can access context inside Functional component
+    const authContext = useContext(AuthContext);
+    console.log('authContext: ', authContext);
 
     // useEffect is React hook which combine all lifeCycle hooks
     // useEffect runs after RENDER
@@ -76,11 +81,15 @@ const cockpit = ( props ) => {
                     toggle persons
             </button>
 
+            {/*
             <AuthContext.Consumer>
                 {(context) => (
                     <button onClick={context.login}>Log In</button>
                 )}
             </AuthContext.Consumer>
+            */}
+            <button onClick={authContext.login}>Log In</button>
+
         </div>
     )
 };
