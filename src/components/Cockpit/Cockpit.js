@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.css'
-
+import AuthContext from '../../context/auth-context';
 // So inside Functional components we use React hooks, since lifeCycle methods are available only in Classes
 
 const cockpit = ( props ) => {
@@ -75,11 +75,12 @@ const cockpit = ( props ) => {
                     onClick={props.toggle}>
                     toggle persons
             </button>
-            <button
-                onClick={props.login}
-            >
-                Log In
-            </button>
+
+            <AuthContext.Consumer>
+                {(context) => (
+                    <button onClick={context.login}>Log In</button>
+                )}
+            </AuthContext.Consumer>
         </div>
     )
 };

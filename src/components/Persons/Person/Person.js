@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 // import Aux from '../../../hoc/Aux'; will use Fragment instead
 import withClass from '../../../hoc/withClass1';
 import classes from './Person.css';
-
+import AuthContext from '../../../context/auth-context';
 
 //const person = ( props ) => {
 class Person extends Component {
@@ -23,7 +23,9 @@ class Person extends Component {
         //     <Aux> use Fragment which is built in React
         return (
             <Fragment>
-                {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in!</p>}
+                <AuthContext.Consumer>
+                    {(context) => context.authenticated ? <p>Authenticated!</p> : <p>Please log in!</p>}
+                </AuthContext.Consumer>
                 <p onClick={this.props.customClick}>
                     I am {this.props.name} and I am {this.props.age} years old!
                 </p>

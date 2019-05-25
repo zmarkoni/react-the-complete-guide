@@ -5,6 +5,7 @@ import Cockpit from "../components/Cockpit/Cockpit"; // need to be uppercase bec
 // import WithClass from '../hoc/WithClass';
 import withClass from '../hoc/withClass1';
 import Aux from '../hoc/Aux';
+import AuthContext from '../context/auth-context'; // can be used as Component and should wrap all parts which need access to that context
 
 // https://reactjs.org/docs/events.html#supported-events
 
@@ -142,19 +143,24 @@ class App extends Component {
             <Aux>
                 <button onClick={() => (
                     this.setState({showCockpit: !this.state.showCockpit})
-                )}
-                >Toggle Cockpit</button>
+                )}>Toggle Cockpit
+                </button>
 
+                <AuthContext.Provider value={{
+                    authenticated: this.state.authenticated,
+                    login: this.loginHandler
+                }}>
                 {this.state.showCockpit ? (
                 <Cockpit
                     title={this.props.appTitle} // this.props is used because we are inside Class
                     toggle={this.togglePersonsHandler}
                     showPersons={this.state.showPersons}
                     personsLength={this.state.persons.length}
-                    login={this.loginHandler}
+                    // login={this.loginHandler} no need anymore since we are using context directly inside person component
                 />
                 ): null}
                 {persons}
+                </AuthContext.Provider>
             </Aux>
         );
     }
