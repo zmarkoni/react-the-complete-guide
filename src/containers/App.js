@@ -23,7 +23,8 @@ class App extends Component {
         ],
         otherState: 'some other test will not be changed!',
         showPersons: false,
-        showCockpit: true
+        showCockpit: true,
+        changeCounter: 0
     };
 
     static getDerivedStateFromProps(props, state) {
@@ -76,7 +77,23 @@ class App extends Component {
         const newPersons = [...this.state.persons];
         newPersons[personIndex] = person; // ovde se u stvari odradjuje poso
 
-        this.setState( {persons: newPersons} );
+        /*
+        this.setState(
+            {
+                persons: newPersons,
+                // changeCounter: this.changeCounter + 1 this is not a good way to update state based on previous state
+            }
+        );
+        */
+
+        // https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/13556334#overview
+        // When we need to update state based on previous state, we need to use the function
+        this.setState((prevState, props) => {
+            return {
+                persons: newPersons,
+                changeCounter: prevState.changeCounter + 1
+            };
+        });
 
     };
 
