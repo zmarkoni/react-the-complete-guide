@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.css'
 
 const cockpit = ( props ) => {
 
+    const toggleBtnRef = useRef(null);
+
     // useEffect is React hook which combine all lifeCycle hooks
+    // useEffect runs after RENDER
     // Can be used in components!!!
     // it runs for every update(every render)
     // We always need to pass function, and for second argument we pass data(props/state)
@@ -14,9 +17,10 @@ const cockpit = ( props ) => {
         // So it runs when component is created, updated
         // Http request...
         //const timer = setTimeout(() => {
-        setTimeout(() => {
-            alert('Saved data to the cloud');
-        }, 1000);
+        // setTimeout(() => {
+        //     alert('Saved data to the cloud');
+        // }, 1000);
+        toggleBtnRef.current.click();
 
         // It runs BEFORE the main useEffect, but AFTER (first) render cycle
         return () => {
@@ -63,7 +67,9 @@ const cockpit = ( props ) => {
         <div className={classes.Cockpit}>
             <h1>{props.title}</h1>
             <p className={assignedClasses.join( ' ' )}>This is really working!</p>
-            <button className={btnClass}
+            <button
+                    ref={toggleBtnRef}
+                    className={btnClass}
                     onClick={props.toggle}>
                     toggle persons
             </button>
