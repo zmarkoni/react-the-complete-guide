@@ -1,5 +1,8 @@
 import React, {Component, Fragment} from 'react';
 // import Aux from '../../../hoc/Aux'; will use Fragment instead
+import withClass from '../../../hoc/withClass1';
+import classes from './Person.css';
+
 
 //const person = ( props ) => {
 class Person extends Component {
@@ -18,5 +21,5 @@ class Person extends Component {
         )
     };
 }
-export default Person;
+export default withClass(Person, classes.Person);
 //export default person;

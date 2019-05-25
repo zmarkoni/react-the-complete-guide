@@ -12,8 +12,9 @@ import React from 'react';
 const withClass = (WrappedComponent, className) => {
     return (props) => (
         // here we return directly JSX
+        // Pass unknown props https://www.udemy.com/react-the-complete-guide-incl-redux/learn/lecture/13556332#overview
         <div className={className}>
-            <WrappedComponent/>
+            <WrappedComponent {...props}/>
         </div>
     );
 };
