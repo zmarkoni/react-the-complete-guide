@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from "../components/Cockpit/Cockpit"; // need to be uppercase because lowercase elements are reserved for React
+// import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass1';
+import Aux from '../hoc/Aux';
 
 // https://reactjs.org/docs/events.html#supported-events
 
@@ -111,8 +114,9 @@ class App extends Component {
             );
         }
 
+        //<WithClass classes={classes.App}>
         return (
-            <div className={classes.App}>
+            <Aux>
                 <button onClick={() => (
                     this.setState({showCockpit: !this.state.showCockpit})
                 )}
@@ -127,9 +131,9 @@ class App extends Component {
                 />
                 ): null}
                 {persons}
-            </div>
+            </Aux>
         );
     }
 }
 
-export default App;
+export default withClass(App, classes.App);
