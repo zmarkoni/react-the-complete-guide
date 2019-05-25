@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.css'
 
+// So inside Functional components we use React hooks, since lifeCycle methods are available only in Classes
+
 const cockpit = ( props ) => {
 
     const toggleBtnRef = useRef(null);
@@ -72,6 +74,11 @@ const cockpit = ( props ) => {
                     className={btnClass}
                     onClick={props.toggle}>
                     toggle persons
+            </button>
+            <button
+                onClick={props.login}
+            >
+                Log In
             </button>
         </div>
     )

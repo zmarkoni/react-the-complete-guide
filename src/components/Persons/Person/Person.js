@@ -23,6 +23,7 @@ class Person extends Component {
         //     <Aux> use Fragment which is built in React
         return (
             <Fragment>
+                {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in!</p>}
                 <p onClick={this.props.customClick}>
                     I am {this.props.name} and I am {this.props.age} years old!
                 </p>
